@@ -1,0 +1,84 @@
+// ============================================================
+//  CATÁLOGO DE SERIES — SAKURA
+//  Agrega, edita o elimina series aquí manualmente.
+//
+//  FORMATO DE CADA SERIE:
+//
+//  {
+//    Nombre: "Título de la serie",
+//    portada: "https://url-de-la-imagen.jpg",
+//    descripcion: "Descripción breve de la serie.",
+//    tag: "ETIQUETA",          // Ej: ACCIÓN, DRAMA, SCI-FI, ANIME, TERROR
+//    generos: ["Género 1", "Género 2"],
+//    destacada: true,          // true = aparece en el hero principal (solo una)
+//
+//    episodios: [
+//      {
+//        titulo: "E1-",
+//        url: "https://url-del-video.mp4"   // mp4, webm o cualquier formato compatible
+//      },
+//      // ... más episodios
+//    ]
+//  },
+//
+// ============================================================
+  // ── Agrega más series aquí abajo con el mismo formato ──────────────────
+  //
+  // {
+  //   Nombre: "Nombre de tu serie",
+  //   portada: "https://...",
+  //   descripcion: "Descripción.",
+  //   tag: "DRAMA",
+  //   generos: ["Drama", "Misterio"],
+  //   destacada: false,
+  //
+  //   episodios: [
+  //     { titulo: "Episodio 1", url: "https://..." },
+  //     { titulo: "Episodio 2", url: "https://..." }
+  //   ]
+  // },
+
+// ══════════════════════════════════════════════════════════════
+//  FORMATO CON TEMPORADAS (opcional):
+//
+//  Si quieres múltiples temporadas en una serie, usa este formato
+//  en lugar del campo "episodios":
+//
+//  {
+//    Nombre: "Mi Serie",
+//    portada: "https://...",
+//    descripcion: "...",
+//    tag: "DRAMA",
+//    generos: ["Drama"],
+//    destacada: false,
+//
+//    temporadas: [
+//      {
+//        nombre: "Temporada 1",
+//        episodios: [
+//          { titulo: "E1-Piloto", url: "https://..." },
+//          { titulo: "E2-Nombre", url: "https://..." }
+//        ]
+//      },
+//      {
+//        nombre: "Temporada 2",
+//        episodios: [
+//          { titulo: "E1-Regreso", url: "https://..." }
+//        ]
+//      }
+//    ]
+//  },
+//
+//  FORMATO CON CALIDADES (opcional, por episodio):
+//
+//  episodios: [
+//    {
+//      titulo: "E1-Piloto",
+//      url: "https://...720p.mp4",   // URL por defecto (usada si no hay calidades)
+//      calidades: {
+//        "720p": "https://...720p.mp4",
+//        "1080p": "https://...1080p.mp4",
+//        "480p":  "https://...480p.mp4"
+//      }
+//    }
+//  ]

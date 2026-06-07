@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sakura</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="detail-page.css">
+</head>
+<body>
+<header>
+  <div class="logo" onclick="goHome()" id="logo-home">SAKURA</div>
+
+  <nav class="main-nav">
+    <a href="#" class="nav-item active" id="nav-popular" onclick="showAllSeries(event)">Popular</a>
+
+    <div class="nav-dropdown" id="nav-categorias">
+      <button class="nav-item nav-dropdown-btn" onclick="toggleCatMenu(event)">
+        Categorías <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" class="dropdown-arrow"><path d="M7 10l5 5 5-5z"/></svg>
+      </button>
+      <div class="cat-mega-menu" id="cat-mega-menu">
+        <div class="cat-menu-left">
+          <div class="cat-section-label">NAVEGAR</div>
+          <a class="cat-link" href="#" onclick="filterCategory(event,'all')">Ver Todo (A–Z)</a>
+          <a class="cat-link" href="#" onclick="filterCategory(event,'novedades')">Novedades</a>
+          <a class="cat-link" href="#" onclick="filterCategory(event,'destacadas')">Destacadas</a>
+        </div>
+        <div class="cat-menu-right">
+          <div class="cat-section-label">GÉNEROS</div>
+          <div class="cat-genres-grid" id="cat-genres-grid"></div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="header-right">
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Buscar series...">
+      <button>
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+    </div>
+    <div class="profile-wrap">
+      <button class="profile-btn" title="Perfil" onclick="toggleProfileMenu(event)">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+      </button>
+      <div class="profile-menu" id="profile-menu">
+        <div class="profile-menu-header">
+          <div class="profile-avatar">
+            <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+          </div>
+          <div>
+            <div class="profile-name">Mi Perfil</div>
+            <div class="profile-sub">Sakura User</div>
+          </div>
+        </div>
+        <div class="profile-divider"></div>
+        <a class="profile-link" href="#">⚙ Configuración</a>
+        <a class="profile-link" href="#">♡ Mi Lista</a>
+        <a class="profile-link" href="#">📋 Historial</a>
+        <div class="profile-divider"></div>
+        <a class="profile-link profile-link-danger" href="#">⇢ Cerrar Sesión</a>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="search-overlay" id="search-overlay">
+  <div class="section-header">
+    <h2 class="search-overlay-title" id="search-label"></h2>
+    <button id="search-overlay-close" class="btn btn-secondary">✕ Cerrar</button>
+  </div>
+  <div class="grid" id="search-grid">
+    <div class="no-results" id="search-no-results">No se encontraron series.</div>
+  </div>
+</div>
+<div class="category-overlay" id="category-overlay">
+  <div class="section-header">
+    <h2 class="section-title" id="category-overlay-title">Categoría</h2>
+    <button id="category-overlay-close" class="btn btn-secondary">✕ Cerrar</button>
+  </div>
+  <div class="grid" id="category-grid">
+    <div class="no-results" id="category-no-results">No hay series en esta categoría.</div>
+  </div>
+</div>
+<section class="hero">
+  <img class="hero-bg" src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=1600&q=80" alt="Hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      DESTACADO
+    </div>
+    <h1 class="hero-title">Cargando...</h1>
+    <div class="hero-meta"></div>
+    <p class="hero-desc"></p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-primary">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+        Ver Ahora
+      </a>
+      <a href="#" class="btn btn-secondary">+ Mi Lista</a>
+    </div>
+  </div>
+</section>
+<main id="main-home">
+
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Más Vistos</h2>
+      <a class="see-all" href="#" onclick="showVerTodo(event,'top')">Ver todo →</a>
+    </div>
+    <div class="scroll-wrap" id="top-scroll-wrap">
+      <button class="scroll-arrow scroll-arrow-left" onclick="scrollRow('top-grid',-1)">&#8249;</button>
+      <div class="grid grid-large row-scroll" id="top-grid"></div>
+      <button class="scroll-arrow scroll-arrow-right" onclick="scrollRow('top-grid',1)">&#8250;</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Continúa Viendo</h2>
+    </div>
+    <div class="scroll-wrap" id="continue-scroll-wrap">
+      <button class="scroll-arrow scroll-arrow-left" onclick="scrollRow('continue-row',-1)">&#8249;</button>
+      <div class="row-scroll" id="continue-row"></div>
+      <button class="scroll-arrow scroll-arrow-right" onclick="scrollRow('continue-row',1)">&#8250;</button>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <h2 class="section-title">Nuevos Episodios</h2>
+      <a class="see-all" href="#" onclick="showVerTodo(event,'new')">Ver todo →</a>
+    </div>
+    <div class="scroll-wrap" id="new-scroll-wrap">
+      <button class="scroll-arrow scroll-arrow-left" onclick="scrollRow('new-grid',-1)">&#8249;</button>
+      <div class="row-scroll" id="new-grid"></div>
+      <button class="scroll-arrow scroll-arrow-right" onclick="scrollRow('new-grid',1)">&#8250;</button>
+    </div>
+  </section>
+
+</main>
+<div id="ver-todo-page">
+  <div class="ver-todo-header">
+    <button class="ver-todo-back" onclick="closeVerTodo()">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Volver
+    </button>
+    <h2 class="section-title" id="ver-todo-title"></h2>
+  </div>
+  <div id="ver-todo-content"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     DETAIL PAGE (Crunchyroll style — reemplaza modal)
+     ═══════════════════════════════════════════════ -->
+<div id="detail-page">
+
+  <!-- Botón volver -->
+  <button class="detail-back-btn" onclick="closeDetailPage()">
+    <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    Volver
+  </button>
+
+  <!-- ── HERO ── -->
+  <div class="detail-hero">
+    <img class="detail-hero-bg" id="detail-hero-bg" src="" alt="">
+    <div class="detail-hero-overlay"></div>
+    <div class="detail-hero-content">
+
+      <!-- Rating -->
+      <div class="detail-rating">
+        <div class="detail-stars" id="detail-stars-wrap"></div>
+        <span class="detail-rating-score" id="detail-rating-score"></span>
+        <span class="detail-rating-count" id="detail-rating-count"></span>
+      </div>
+
+      <!-- Título -->
+      <h1 class="detail-title" id="detail-title-el"></h1>
+
+      <!-- Meta -->
+      <div class="detail-meta-row" id="detail-meta-row"></div>
+
+      <!-- Acciones -->
+      <div class="detail-actions">
+        <button class="detail-btn-play" id="detail-hero-play-btn">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          COMENZAR A VER E1
+        </button>
+        <button class="detail-btn-list" title="Agregar a mi lista">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        </button>
+        <button class="detail-btn-share" title="Compartir">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </button>
+      </div>
+
+      <!-- Descripción -->
+      <p class="detail-desc" id="detail-desc-el"></p>
+
+      <!-- Audio / Subtítulos -->
+      <div class="detail-lang-row">
+        <div class="detail-lang-block">
+          <strong>Audio:</strong>
+          <span id="detail-audio-el">Japonés</span>
+        </div>
+        <div class="detail-lang-block">
+          <strong>Subtítulos:</strong>
+          <span id="detail-subs-el">Español (América Latina)</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── PLAYER EMBEBIDO (aparece al reproducir) ── -->
+  <div class="detail-player-section">
+    <div class="detail-player-wrap" id="detail-player-wrap">
+      <div id="detail-player-area" style="position:relative;width:100%;height:100%"></div>
+    </div>
+  </div>
+
+  <!-- ── EPISODIOS ── -->
+  <div class="detail-episodes-section">
+
+    <!-- Cabecera de temporada -->
+    <div class="detail-season-header" id="detail-season-header">
+      <span class="detail-season-title" id="detail-season-label">Temporada 1</span>
+      <div class="detail-season-tabs" id="detail-season-tabs"></div>
+    </div>
+
+    <!-- Controles (sort) -->
+    <div class="detail-ep-controls">
+      <div style="position:relative">
+        <button class="detail-sort-btn" id="detail-sort-btn" onclick="_detailToggleSortMenu()">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M3 18h6v-2H3v2zm0-5h12v-2H3v2zm0-7v2h18V6H3z"/></svg>
+          <span id="detail-sort-label">LO MÁS ANTIGUO</span>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+        </button>
+        <div class="detail-sort-menu" id="detail-sort-menu">
+          <div class="detail-sort-opt active" data-sort="asc"  onclick="_detailSetSort(true)">Lo más antiguo</div>
+          <div class="detail-sort-opt"        data-sort="desc" onclick="_detailSetSort(false)">Lo más reciente</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid de episodios -->
+    <div class="detail-ep-grid" id="detail-ep-grid"></div>
+
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">SAKURA</div>
+    <div class="footer-links">
+      <a href="#">Acerca de</a>
+      <a href="#">Privacidad</a>
+      <a href="#">Términos</a>
+      <a href="#">Contacto</a>
+    </div>
+    <div class="footer-copy">© 2024 Sakura. Todos los derechos reservados.</div>
+  </div>
+</footer>
+<div class="modal-backdrop" id="modal" onclick="closeModal(event)">
+  <div class="modal" id="modal-inner">
+
+    <button class="modal-close" id="modal-close-btn">✕</button>
+
+    <div class="modal-layout">
+      <div class="modal-left">
+        <div class="modal-player-area" id="modal-player-area"></div>
+        <div class="modal-left-info">
+          <div id="modal-tag-el" class="tag"></div>
+          <h2 class="modal-title" id="modal-title"></h2>
+          <div class="modal-tags" id="modal-tags"></div>
+          <p class="modal-desc" id="modal-desc"></p>
+          <div class="modal-actions">
+            <button class="btn btn-primary" id="modal-play-btn">
+              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+              Reproducir
+            </button>
+            <button class="btn btn-secondary">+ Mi Lista</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-right">
+        <div class="season-selector" id="season-selector">
+          <div class="ep-title">Temporada</div>
+          <div class="season-tabs" id="season-tabs"></div>
+        </div>
+        <div class="ep-title ep-title-episodes">Episodios</div>
+        <div class="ep-list" id="modal-eps"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="catalogo.js"></script>
+<script src="top-vistos.js"></script>
+<script src="app.js"></script>
+<script src="detail-page.js"></script>
+</body>
+</html>
